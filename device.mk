@@ -14,20 +14,14 @@
 # limitations under the License.
 #
 
-# Enable virtual A/B OTA
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
 # Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
+# Inherit qcom common stuff
+$(call inherit-product, device/qcom/common/common.mk)
+
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/oneplus/lemonkebab/lemonkebab-vendor.mk)
-
-# OnePlus Camera
-#$(call inherit-product, vendor/oneplus/addons/camera/camera-vendor.mk)
-
-# Inherit OnePlus-fwk from vendor/oneplus/extras
-$(call inherit-product, vendor/oneplus/extras/OnePlus-fwk.mk)
+$(call inherit-product, vendor/realme/RMX3370/RMX3370-vendor.mk)
 
 TARGET_KERNEL_VERSION := 4.19
 
@@ -136,14 +130,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 # DeviceSettings
-PRODUCT_PACKAGES += \
-    DeviceSettings
+#PRODUCT_PACKAGES += \
+#    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
     android.frameworks.displayservice@1.0.vendor \
-    vendor.oneplus.hardware.display@1.0.vendor \
-    vendor.oneplus.hardware.display@1.0 \
     libwfdaac_vendor \
     libwfdaac_vendor.vendor \
     libdisplayconfig.qti \
@@ -154,11 +146,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.3.vendor \
     android.hardware.drm@1.4-service.clearkey
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.oneplus_kona \
-    vendor.oneplus.fingerprint.extension@1.0
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml    
@@ -202,22 +189,13 @@ PRODUCT_PACKAGES += \
 # Init
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    init.oneplus.camera.rc \
-    init.oneplus.display.rc \
-    init.oneplus.fingerprint.rc \
-    init.oneplus.haptics.rc \
-    init.oneplus.power.rc \
-    init.oneplus.telephony.rc \
-    init.oneplus.usb.rc \
     init.qti.chg_policy.sh \
     init.qti.dcvs.sh \
-    init.qti.ufs.rc \
-    init.target.rc \
-    libinit_sm8250 \
-    ueventd.oneplus.rc
+    init.qti.ufs.rc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom \
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.default
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -329,7 +307,7 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    device/oneplus/lemonkebab
+    device/realme/RMX3370
 
 # Thermal
 PRODUCT_PACKAGES += \

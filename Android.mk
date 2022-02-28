@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter lemonkebab,$(TARGET_DEVICE)),)
+ifneq ($(filter RMX3370,$(TARGET_DEVICE)),)
 
 subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
 
